@@ -2,6 +2,7 @@
 
 import qixColor from "color";
 import {
+  MouseEvent,
   ReactElement
 } from "react";
 import {
@@ -20,17 +21,19 @@ const ColorView = create(
   function ({
     color,
     showInfo,
-    pop = false
+    pop = false,
+    onClick
   }: {
     color: Color,
     showInfo: boolean,
-    pop?: boolean
+    pop?: boolean,
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   }): ReactElement {
 
     const light = qixColor(color.hex).isLight();
 
     const node = (
-      <div styleName="root" style={{["--color"]: color.hex} as any} {...data({light, pop})}>
+      <button styleName="root" onClick={onClick} disabled={onClick === undefined} style={{["--color"]: color.hex} as any} {...data({light, pop})}>
         {showInfo && (
           <>
             <div styleName="name">{color.name}</div>
@@ -40,7 +43,7 @@ const ColorView = create(
             </div>
           </>
         )}
-      </div>
+      </button>
     );
     return node;
 

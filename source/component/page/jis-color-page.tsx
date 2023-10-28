@@ -45,7 +45,7 @@ const JisColorPage = create(
           <div styleName="color-list">
             {quiz.choiceColors.map((color, index) => (
               <div key={color.name} styleName="color">
-                <ColorView color={color} showInfo={showAnswer} pop={showAnswer && quiz.correctChoiceIndex === index}/>
+                <ColorView color={color} showInfo={showAnswer} pop={showAnswer && quiz.correctChoiceIndex === index} onClick={!showAnswer ? proceed : undefined}/>
               </div>
             ))}
           </div>
