@@ -1,5 +1,7 @@
 //
 
+import {faArrowRight, faLightbulb} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
   ReactElement, useCallback, useState
 } from "react";
@@ -70,6 +72,7 @@ const JisColorPage = create(
           </div>
           <div styleName="button">
             <Button onClick={proceed}>
+              <FontAwesomeIcon styleName="button-icon" icon={showAnswer ? faArrowRight : faLightbulb}/>
               {showAnswer ? "次へ" : "色名を表示"}
             </Button>
           </div>
