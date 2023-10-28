@@ -43,9 +43,9 @@ const JisColorPage = create(
             <span styleName="after-target-name">はどれ?</span>
           </p>
           <div styleName="color-list">
-            {quiz.choiceColors.map((color, index) => (
-              <div key={color.name} styleName="color">
-                <ColorView color={color} showInfo={showAnswer} pop={showAnswer && quiz.correctChoiceIndex === index} onClick={!showAnswer ? proceed : undefined}/>
+            {quiz.choices.map((choice, index) => (
+              <div key={choice.color.name} styleName="color">
+                <ColorView color={choice.color} showInfo={showAnswer} pop={showAnswer && choice.correct} onClick={!showAnswer ? proceed : undefined}/>
               </div>
             ))}
           </div>
