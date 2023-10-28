@@ -54,8 +54,8 @@ const PccsColorPage = create(
         <div styleName="main">
           <div styleName="difficulty">
             <Radio name="出題タイプ" value="ランダム" checked={type === "random"} onSet={(checked) => checked && changeType("random")}>ランダム</Radio>
-            <Radio name="出題タイプ" value="トーンを統一" checked={type === "sameTone"} onSet={(checked) => checked && changeType("sameTone")}>トーンを統一</Radio>
-            <Radio name="出題タイプ" value="色相を統一" checked={type === "sameHue"} onSet={(checked) => checked && changeType("sameHue")}>色相を統一</Radio>
+            <Radio name="出題タイプ" value="同一トーン" checked={type === "sameTone"} onSet={(checked) => checked && changeType("sameTone")}>同一トーン</Radio>
+            <Radio name="出題タイプ" value="同一色相" checked={type === "sameHue"} onSet={(checked) => checked && changeType("sameHue")}>同一色相</Radio>
           </div>
           <p styleName="question">
             <span styleName="target-name">{quiz.targetColor.name}</span>
