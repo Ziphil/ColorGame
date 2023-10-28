@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 16.x
       - name: Install packages
-        run: npm ci --force
+        run: npm install
       - name: Build
         run: npm run build
       - name: Upload artifact
