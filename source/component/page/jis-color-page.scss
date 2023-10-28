@@ -1,6 +1,14 @@
 @charset "utf-8";
 
 
+.difficulty {
+  margin-block-end: 48px;
+  column-gap: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .question {
   margin-block-end: 48px;
   display: flex;
