@@ -8,7 +8,7 @@ import {
 } from "/source/util/misc";
 
 
-export function generateColorQuiz(targetColor: Color, wrongColors: Array<Color>): ColorQuiz {
+export function generateColorQuiz<C extends Color>(targetColor: C, wrongColors: Array<C>): ColorQuiz<C> {
   const correctIndex = Math.floor(Math.random() * 4);
   const choices = [];
   choices.push(...pick(wrongColors, 3).map((color) => ({color, correct: false})));
@@ -16,11 +16,11 @@ export function generateColorQuiz(targetColor: Color, wrongColors: Array<Color>)
   return {targetColor, choices};
 }
 
-export type ColorQuiz = {
-  targetColor: Color,
-  choices: Array<ColorQuizChoice>
+export type ColorQuiz<C extends Color> = {
+  targetColor: C,
+  choices: Array<ColorQuizChoice<C>>
 };
-export type ColorQuizChoice = {
-  color: Color,
+export type ColorQuizChoice<C extends Color> = {
+  color: C,
   correct: boolean
 };

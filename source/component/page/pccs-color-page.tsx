@@ -30,22 +30,22 @@ const PccsColorPage = create(
   }: {
   }): ReactElement {
 
-    const [difficulty, setDifficulty] = useState<1 | 2 | 3>(1);
-    const [quiz, setQuiz] = useState(createPccsColorQuiz(difficulty));
+    const [type, setType] = useState<"random" | "sameTone" | "sameHue">("random");
+    const [quiz, setQuiz] = useState(createPccsColorQuiz(type));
     const [showAnswer, setShowAnswer] = useState(false);
 
     const proceed = useCallback(function () {
       if (showAnswer) {
-        setQuiz(createPccsColorQuiz(difficulty));
+        setQuiz(createPccsColorQuiz(type));
         setShowAnswer(false);
       } else {
         setShowAnswer(true);
       }
-    }, [showAnswer, difficulty]);
+    }, [showAnswer, type]);
 
-    const changeDifficulty = useCallback(function (difficulty: 1 | 2 | 3) {
-      setDifficulty(difficulty);
-      setQuiz(createPccsColorQuiz(difficulty));
+    const changeType = useCallback(function (type: "random" | "sameTone" | "sameHue") {
+      setType(type);
+      setQuiz(createPccsColorQuiz(type));
       setShowAnswer(false);
     }, []);
 
@@ -53,7 +53,9 @@ const PccsColorPage = create(
       <PageContainer>
         <div styleName="main">
           <div styleName="difficulty">
-            <Radio name="難易度" value="Easy" checked={difficulty === 1} onSet={(checked) => checked && changeDifficulty(1)}>Easy</Radio>
+            <Radio name="出題タイプ" value="ランダム" checked={type === "random"} onSet={(checked) => checked && changeType("random")}>ランダム</Radio>
+            <Radio name="出題タイプ" value="トーンを統一" checked={type === "sameTone"} onSet={(checked) => checked && changeType("sameTone")}>トーンを統一</Radio>
+            <Radio name="出題タイプ" value="色相を統一" checked={type === "sameHue"} onSet={(checked) => checked && changeType("sameHue")}>色相を統一</Radio>
           </div>
           <p styleName="question">
             <span styleName="target-name">{quiz.targetColor.name}</span>

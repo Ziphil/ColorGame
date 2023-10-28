@@ -6,22 +6,19 @@ import {
 } from "munsell";
 
 
-export function createColors(minimalColors: Array<MinimalColor>): Array<Color> {
+export function createColors<A>(minimalColors: Array<MinimalColor & A>): Array<Color & A> {
   const colors = minimalColors.map((color) => {
     if (color.name && color.munsell) {
       const munsell = color.munsell;
-      const munsellHue = munsellToMhvc(munsell)[0];
-      const hex = munsellToHex(munsell).toUpperCase();
       return {
-        name: color.name,
-        munsell: color.munsell,
-        munsellHue,
-        hex
+        ...color,
+        mhvs: munsellToMhvc(munsell),
+        hex: munsellToHex(munsell).toUpperCase()
       };
     } else {
       return null;
     }
-  }).filter(isValidColor);
+  }).filter(isValidColor) as Array<Color & A>;
   return colors;
 }
 
@@ -36,6 +33,6 @@ type MinimalColor = {
 export type Color = {
   name: string,
   munsell: string,
-  munsellHue: number,
+  mhvs: [hue: number, value: number, chroma: number],
   hex: string
 };

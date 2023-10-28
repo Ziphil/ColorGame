@@ -1,7 +1,9 @@
 //
 
 import {
-  Color,
+  ElementOf
+} from "ts-essentials";
+import {
   createColors
 } from "/source/util/color";
 import {
@@ -144,7 +146,7 @@ export const JIS_COLORS = createColors([
   {name: "ランプブラック", munsell: "N 1"}
 ]);
 
-export function createJisColorQuiz(difficulty: 1 | 2 | 3): ColorQuiz {
+export function createJisColorQuiz(difficulty: 1 | 2 | 3): ColorQuiz<JisColor> {
   const colors = JIS_COLORS;
   const targetColor = colors[Math.floor(Math.random() * colors.length)];
   const wrongColors = generateWrongColors(colors, targetColor, difficulty);
@@ -152,20 +154,22 @@ export function createJisColorQuiz(difficulty: 1 | 2 | 3): ColorQuiz {
   return quiz;
 }
 
-function generateWrongColors(colors: Array<Color>, targetColor: Color, difficulty: 1 | 2 | 3) {
+function generateWrongColors(colors: Array<JisColor>, targetColor: JisColor, difficulty: 1 | 2 | 3) {
   const otherColors = colors.filter((color) => color !== targetColor);
   const wrongColors = [];
   if (difficulty === 1) {
     wrongColors.push(...pick(otherColors, 3));
   } else if (difficulty === 2) {
     const wrongHue = Math.floor(Math.random() * 100);
-    const targetSimilarColors = otherColors.filter((color) => modDiff(color.munsellHue, targetColor.munsellHue, 100) < 10);
-    const wrongSimilarColors = otherColors.filter((color) => modDiff(color.munsellHue, wrongHue, 100) < 10);
+    const targetSimilarColors = otherColors.filter((color) => modDiff(color.mhvs[0], targetColor.mhvs[0], 100) < 10);
+    const wrongSimilarColors = otherColors.filter((color) => modDiff(color.mhvs[0], wrongHue, 100) < 10);
     wrongColors.push(...pick(targetSimilarColors, 1));
     wrongColors.push(...pick(wrongSimilarColors, 2));
   } else {
-    const targetSimilarColors = otherColors.filter((color) => modDiff(color.munsellHue, targetColor.munsellHue, 100) < 10);
+    const targetSimilarColors = otherColors.filter((color) => modDiff(color.mhvs[0], targetColor.mhvs[0], 100) < 10);
     wrongColors.push(...pick(targetSimilarColors, 3));
   }
   return wrongColors;
 }
+
+export type JisColor = ElementOf<typeof JIS_COLORS>;;
