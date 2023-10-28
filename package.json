@@ -13,10 +13,6 @@
     "lint": "eslint source/**/*.ts source/**/*.tsx",
     "lint:fix": "eslint --fix source/**/*.ts source/**/*.tsx"
   },
-  "engines": {
-    "node": "16.13.2",
-    "npm": "8.1.2"
-  },
   "eslintConfig": {
     "extends": [
       "ziphil",
