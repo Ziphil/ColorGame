@@ -2,7 +2,7 @@
 
 
 .difficulty {
-  margin-block-end: 48px;
+  margin-block-end: 40px;
   column-gap: 16px;
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@
 }
 
 .question {
-  margin-block-end: 48px;
+  margin-block-end: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +34,7 @@
 }
 
 .button {
-  margin-block-start: 48px;
+  margin-block-start: 40px;
   display: flex;
   justify-content: center;
   >* {

@@ -12,8 +12,9 @@
   aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   cursor: pointer;
+  position: relative;
+  z-index: 0;
   &:focus-visible {
     outline: 3px var(--focus-color) solid;
   }
@@ -31,6 +32,14 @@
   }
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  z-index: 1;
+}
+
 .name {
   font-size: 130%;
   font-weight: bold;
@@ -42,7 +51,26 @@
   row-gap: 4px;
   font-size: 80%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.mark {
+  inset: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 0;
+}
+
+.mark-icon {
+  height: 50%;
+  .root[data-light] & {
+    color: hsla(0, 0%, 0%, 0.2);
+  }
+  .root:not([data-light]) & {
+    color: hsla(0, 0%, 100%, 0.2);
+  }
 }
 
 
