@@ -20,23 +20,23 @@ import {
   create
 } from "/source/component/create";
 import {
-  createJisColorQuiz
-} from "/source/util/jis-color";
+  createPccsColorQuiz
+} from "/source/util/pccs-color";
 
 
-const JisColorPage = create(
-  require("./jis-color-page.scss"), "JisColorPage",
+const PccsColorPage = create(
+  require("./pccs-color-page.scss"), "PccsColorPage",
   function ({
   }: {
   }): ReactElement {
 
     const [difficulty, setDifficulty] = useState<1 | 2 | 3>(1);
-    const [quiz, setQuiz] = useState(createJisColorQuiz(difficulty));
+    const [quiz, setQuiz] = useState(createPccsColorQuiz(difficulty));
     const [showAnswer, setShowAnswer] = useState(false);
 
     const proceed = useCallback(function () {
       if (showAnswer) {
-        setQuiz(createJisColorQuiz(difficulty));
+        setQuiz(createPccsColorQuiz(difficulty));
         setShowAnswer(false);
       } else {
         setShowAnswer(true);
@@ -45,7 +45,7 @@ const JisColorPage = create(
 
     const changeDifficulty = useCallback(function (difficulty: 1 | 2 | 3) {
       setDifficulty(difficulty);
-      setQuiz(createJisColorQuiz(difficulty));
+      setQuiz(createPccsColorQuiz(difficulty));
       setShowAnswer(false);
     }, []);
 
@@ -54,8 +54,6 @@ const JisColorPage = create(
         <div styleName="main">
           <div styleName="difficulty">
             <Radio name="難易度" value="Easy" checked={difficulty === 1} onSet={(checked) => checked && changeDifficulty(1)}>Easy</Radio>
-            <Radio name="難易度" value="Normal" checked={difficulty === 2} onSet={(checked) => checked && changeDifficulty(2)}>Normal</Radio>
-            <Radio name="難易度" value="Hard" checked={difficulty === 3} onSet={(checked) => checked && changeDifficulty(3)}>Hard</Radio>
           </div>
           <p styleName="question">
             <span styleName="target-name">{quiz.targetColor.name}</span>
@@ -89,4 +87,4 @@ const JisColorPage = create(
 );
 
 
-export default JisColorPage;
+export default PccsColorPage;

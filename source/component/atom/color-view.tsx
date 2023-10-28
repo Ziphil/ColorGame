@@ -1,7 +1,12 @@
 /* eslint-disable no-useless-computed-key */
 
-import {faO, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+  faO,
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  FontAwesomeIcon
+} from "@fortawesome/react-fontawesome";
 import qixColor from "color";
 import {
   MouseEvent,
@@ -11,11 +16,11 @@ import {
   create
 } from "/source/component/create";
 import {
+  Color
+} from "/source/util/color";
+import {
   data
 } from "/source/util/data";
-import {
-  Color
-} from "/source/util/jis-color";
 
 
 const ColorView = create(

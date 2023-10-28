@@ -1,0 +1,180 @@
+//
+
+import {
+  Color,
+  createColors
+} from "/source/util/color";
+import {
+  ColorQuiz,
+  generateColorQuiz
+} from "/source/util/color-quiz";
+import {
+  pick
+} from "/source/util/misc";
+
+
+export const PCCS_COLORS = createColors([
+  {name: "v2", munsell: "4R 4.5/14"},
+  {name: "v4", munsell: "10R 5.5/14"},
+  {name: "v6", munsell: "8YR 7/13"},
+  {name: "v8", munsell: "5Y 8/13"},
+  {name: "v10", munsell: "3GY 7/12"},
+  {name: "v12", munsell: "3G 5.5/11"},
+  {name: "v14", munsell: "5BG 4.5/10"},
+  {name: "v16", munsell: "5B 4/10"},
+  {name: "v18", munsell: "3PB 3.5/11.5"},
+  {name: "v20", munsell: "9PB 3.5/11.5"},
+  {name: "v22", munsell: "7P 3.5/11.5"},
+  {name: "v24", munsell: "6RP 4/12.5"},
+  {name: "b2", munsell: "4R 6/12"},
+  {name: "b4", munsell: "10R 6.5/11.5"},
+  {name: "b6", munsell: "8YR 7.5/11.5"},
+  {name: "b8", munsell: "5Y 8.5/11"},
+  {name: "b10", munsell: "3GY 7.5/10"},
+  {name: "b12", munsell: "3G 6.5/9"},
+  {name: "b14", munsell: "5BG 6/8.5"},
+  {name: "b16", munsell: "5B 5.5/8.5"},
+  {name: "b18", munsell: "3PB 5/10"},
+  {name: "b20", munsell: "9PB 5/10"},
+  {name: "b22", munsell: "7P 5/10"},
+  {name: "b24", munsell: "6RP 5.5/10.5"},
+  {name: "s2", munsell: "4R 4.5/12"},
+  {name: "s4", munsell: "10R 5/11.5"},
+  {name: "s6", munsell: "8YR 6.5/11.5"},
+  {name: "s8", munsell: "5Y 7.5/11"},
+  {name: "s10", munsell: "3GY 6.5/10"},
+  {name: "s12", munsell: "3G 5/9"},
+  {name: "s14", munsell: "5BG 4.5/8.5"},
+  {name: "s16", munsell: "5B 4/8.5"},
+  {name: "s18", munsell: "3PB 3.5/10"},
+  {name: "s20", munsell: "9PB 3.5/10"},
+  {name: "s22", munsell: "7P 3.5/10"},
+  {name: "s24", munsell: "6RP 4/10.5"},
+  {name: "dp2", munsell: "4R 3.5/11.5"},
+  {name: "dp4", munsell: "10R 4/11"},
+  {name: "dp6", munsell: "8YR 5/11"},
+  {name: "dp8", munsell: "5Y 6/10.5"},
+  {name: "dp10", munsell: "3GY 5/9.5"},
+  {name: "dp12", munsell: "3G 4/8"},
+  {name: "dp14", munsell: "5BG 3.5/8"},
+  {name: "dp16", munsell: "5B 3/8"},
+  {name: "dp18", munsell: "3PB 2.5/9.5"},
+  {name: "dp20", munsell: "9PB 2.5/9.5"},
+  {name: "dp22", munsell: "7P 2.5/9.5"},
+  {name: "dp24", munsell: "6RP 3/10"},
+  {name: "lt2+", munsell: "4R 7/8"},
+  {name: "lt4+", munsell: "10R 7.5/8"},
+  {name: "lt6+", munsell: "8YR 8/8"},
+  {name: "lt8+", munsell: "5Y 8.5/7.5"},
+  {name: "lt10+", munsell: "3GY 8/7"},
+  {name: "lt12+", munsell: "3G 7.5/6"},
+  {name: "lt14+", munsell: "5BG 7/6"},
+  {name: "lt16+", munsell: "5B 6.5/6"},
+  {name: "lt18+", munsell: "3PB 6/7"},
+  {name: "lt20+", munsell: "9PB 6/7"},
+  {name: "lt22+", munsell: "7P 6/7"},
+  {name: "lt24+", munsell: "6RP 6.5/7.5"},
+  {name: "sf2", munsell: "4R 6/6.5"},
+  {name: "sf4", munsell: "10R 6.5/6.5"},
+  {name: "sf6", munsell: "8YR 7/6.5"},
+  {name: "sf8", munsell: "5Y 7.5/6"},
+  {name: "sf10", munsell: "3GY 7/5.5"},
+  {name: "sf12", munsell: "3G 6.5/5"},
+  {name: "sf14", munsell: "5BG 6/5"},
+  {name: "sf16", munsell: "5B 5.5/5"},
+  {name: "sf18", munsell: "3PB 5/5.5"},
+  {name: "sf20", munsell: "9PB 5/5.5"},
+  {name: "sf22", munsell: "7P 5/5.5"},
+  {name: "sf24", munsell: "6RP 5.5/6"},
+  {name: "d2", munsell: "4R 4.5/6.5"},
+  {name: "d4", munsell: "10R 5/6.5"},
+  {name: "d6", munsell: "8YR 5.5/6.5"},
+  {name: "d8", munsell: "5Y 6/6"},
+  {name: "d10", munsell: "3GY 5.5/5.5"},
+  {name: "d12", munsell: "3G 5/5"},
+  {name: "d14", munsell: "5BG 4.5/5"},
+  {name: "d16", munsell: "5B 4/5"},
+  {name: "d18", munsell: "3PB 3.5/5.5"},
+  {name: "d20", munsell: "9PB 3.5/5.5"},
+  {name: "d22", munsell: "7P 3.5/5.5"},
+  {name: "d24", munsell: "6RP 4/6"},
+  {name: "dk2", munsell: "4R 2.5/6"},
+  {name: "dk4", munsell: "10R 3/6"},
+  {name: "dk6", munsell: "8YR 3.5/6"},
+  {name: "dk8", munsell: "5Y 4/5.5"},
+  {name: "dk10", munsell: "3GY 3.5/5"},
+  {name: "dk12", munsell: "3G 3/4.5"},
+  {name: "dk14", munsell: "5BG 2.5/4.5"},
+  {name: "dk16", munsell: "5B 2.5/4.5"},
+  {name: "dk18", munsell: "3PB 2/5"},
+  {name: "dk20", munsell: "9PB 2/5"},
+  {name: "dk22", munsell: "7P 2/5"},
+  {name: "dk24", munsell: "6RP 2.5/5.5"},
+  {name: "p2+", munsell: "4R 8/3.5"},
+  {name: "p4+", munsell: "10R 8/3.5"},
+  {name: "p6+", munsell: "8YR 8.5/3.5"},
+  {name: "p8+", munsell: "5Y 9/3"},
+  {name: "p10+", munsell: "3GY 8.5/3"},
+  {name: "p12+", munsell: "3G 8/3"},
+  {name: "p14+", munsell: "5BG 8/3"},
+  {name: "p16+", munsell: "5B 8/3"},
+  {name: "p18+", munsell: "3PB 7.5/3"},
+  {name: "p20+", munsell: "9PB 7.5/3"},
+  {name: "p22+", munsell: "7P 7.5/3"},
+  {name: "p24+", munsell: "6RP 8/3"},
+  {name: "ltg2", munsell: "4R 7/2"},
+  {name: "ltg4", munsell: "10R 7/2"},
+  {name: "ltg6", munsell: "8YR 7.5/2"},
+  {name: "ltg8", munsell: "5Y 7.5/2"},
+  {name: "ltg10", munsell: "3GY 7.5/2"},
+  {name: "ltg12", munsell: "3G 7/2"},
+  {name: "ltg14", munsell: "5BG 7/2"},
+  {name: "ltg16", munsell: "5B 7/2"},
+  {name: "ltg18", munsell: "3PB 6.5/2"},
+  {name: "ltg20", munsell: "9PB 6.5/2"},
+  {name: "ltg22", munsell: "7P 6.5/2"},
+  {name: "ltg24", munsell: "6RP 7/2"},
+  {name: "g2", munsell: "4R 4/2"},
+  {name: "g4", munsell: "10R 4/2"},
+  {name: "g6", munsell: "8YR 4.5/2"},
+  {name: "g8", munsell: "5Y 4.5/2"},
+  {name: "g10", munsell: "3GY 4.5/2"},
+  {name: "g12", munsell: "3G 4/2"},
+  {name: "g14", munsell: "5BG 4/2"},
+  {name: "g16", munsell: "5B 4/2"},
+  {name: "g18", munsell: "3PB 3.5/2"},
+  {name: "g20", munsell: "9PB 3.5/2"},
+  {name: "g22", munsell: "7P 3.5/2"},
+  {name: "g24", munsell: "6RP 4/2"},
+  {name: "dkg2", munsell: "4R 2/1.5"},
+  {name: "dkg4", munsell: "10R 2/1.5"},
+  {name: "dkg6", munsell: "8YR 2.5/1.5"},
+  {name: "dkg8", munsell: "5Y 2.5/1.5"},
+  {name: "dkg10", munsell: "3GY 2.5/1.5"},
+  {name: "dkg12", munsell: "3G 2/1.5"},
+  {name: "dkg14", munsell: "5BG 2/1.5"},
+  {name: "dkg16", munsell: "5B 2/1.5"},
+  {name: "dkg18", munsell: "3PB 1.5/1.5"},
+  {name: "dkg20", munsell: "9PB 1.5/1.5"},
+  {name: "dkg22", munsell: "7P 1.5/1.5"},
+  {name: "dkg24", munsell: "6RP 2/1.5"}
+]);
+
+export function createPccsColorQuiz(difficulty: 1 | 2 | 3): ColorQuiz {
+  const colors = PCCS_COLORS;
+  const targetColor = colors[Math.floor(Math.random() * colors.length)];
+  const wrongColors = generateWrongColors(colors, targetColor, difficulty);
+  const quiz = generateColorQuiz(targetColor, wrongColors);
+  return quiz;
+}
+
+function generateWrongColors(colors: Array<Color>, targetColor: Color, difficulty: 1 | 2 | 3) {
+  const otherColors = colors.filter((color) => color !== targetColor);
+  const wrongColors = [];
+  if (difficulty === 1) {
+    wrongColors.push(...pick(otherColors, 3));
+  } else {
+    throw new Error("not implemented");
+  }
+  return wrongColors;
+}

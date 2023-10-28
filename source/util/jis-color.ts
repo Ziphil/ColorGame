@@ -1,9 +1,20 @@
 //
 
-import {munsellToHex, munsellToMhvc} from "munsell";
+import {
+  Color,
+  createColors
+} from "/source/util/color";
+import {
+  ColorQuiz,
+  generateColorQuiz
+} from "/source/util/color-quiz";
+import {
+  modDiff,
+  pick
+} from "/source/util/misc";
 
 
-const JIS_MINIMAL_COLORS = [
+export const JIS_COLORS = createColors([
   {name: "桜色", munsell: "10RP 9/2.5"},
   {name: "紅梅色", munsell: "2.5R 6.5/7.5"},
   {name: "珊瑚色", munsell: "2.5R 7/11"},
@@ -131,40 +142,30 @@ const JIS_MINIMAL_COLORS = [
   {name: "煤竹色", munsell: "9.5YR 3.5/1.5"},
   {name: "スレートグレイ", munsell: "2.5PB 3.5/0.5"},
   {name: "ランプブラック", munsell: "N 1"}
-];
+]);
 
-export const JIS_COLORS = createJisColors(JIS_MINIMAL_COLORS);
-
-function createJisColors(minimalColors: Array<MinimalColor>): Array<Color> {
-  const colors = minimalColors.map((color) => {
-    if (color.name && color.munsell) {
-      const munsell = color.munsell;
-      const munsellHue = munsellToMhvc(munsell)[0];
-      const hex = munsellToHex(munsell).toUpperCase();
-      return {
-        name: color.name,
-        munsell: color.munsell,
-        munsellHue,
-        hex
-      };
-    } else {
-      return null;
-    }
-  }).filter(isValidColor);
-  return colors;
+export function createJisColorQuiz(difficulty: 1 | 2 | 3): ColorQuiz {
+  const colors = JIS_COLORS;
+  const targetColor = colors[Math.floor(Math.random() * colors.length)];
+  const wrongColors = generateWrongColors(colors, targetColor, difficulty);
+  const quiz = generateColorQuiz(targetColor, wrongColors);
+  return quiz;
 }
 
-function isValidColor(color: Color | null): color is Color {
-  return color !== null;
+function generateWrongColors(colors: Array<Color>, targetColor: Color, difficulty: 1 | 2 | 3) {
+  const otherColors = colors.filter((color) => color !== targetColor);
+  const wrongColors = [];
+  if (difficulty === 1) {
+    wrongColors.push(...pick(otherColors, 3));
+  } else if (difficulty === 2) {
+    const wrongHue = Math.floor(Math.random() * 100);
+    const targetSimilarColors = otherColors.filter((color) => modDiff(color.munsellHue, targetColor.munsellHue, 100) < 10);
+    const wrongSimilarColors = otherColors.filter((color) => modDiff(color.munsellHue, wrongHue, 100) < 10);
+    wrongColors.push(...pick(targetSimilarColors, 1));
+    wrongColors.push(...pick(wrongSimilarColors, 2));
+  } else {
+    const targetSimilarColors = otherColors.filter((color) => modDiff(color.munsellHue, targetColor.munsellHue, 100) < 10);
+    wrongColors.push(...pick(targetSimilarColors, 3));
+  }
+  return wrongColors;
 }
-
-type MinimalColor = {
-  name: string,
-  munsell: string
-};
-export type Color = {
-  name: string,
-  munsell: string,
-  munsellHue: number,
-  hex: string
-};
