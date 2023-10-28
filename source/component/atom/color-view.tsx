@@ -32,8 +32,12 @@ const ColorView = create(
 
     const light = qixColor(color.hex).isLight();
 
+    const style = {
+      ["--color"]: qixColor(color.hex).toString(),
+      ["--focus-color"]: qixColor(color.hex).alpha(0.5).toString()
+    } as any;
     const node = (
-      <button styleName="root" onClick={onClick} disabled={onClick === undefined} style={{["--color"]: color.hex} as any} {...data({light, pop})}>
+      <button styleName="root" onClick={onClick} disabled={onClick === undefined} style={style} {...data({light, pop})}>
         {showInfo && (
           <>
             <div styleName="name">{color.name}</div>

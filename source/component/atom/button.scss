@@ -12,6 +12,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  &:focus-visible {
+    outline: 3px hsla(0, 0%, 88%, 0.5) solid;
+  }
   &:disabled {
     cursor: inherit;
   }

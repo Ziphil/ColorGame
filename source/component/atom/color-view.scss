@@ -14,6 +14,9 @@
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  &:focus-visible {
+    outline: 3px var(--focus-color) solid;
+  }
   &:disabled {
     cursor: inherit;
   }
