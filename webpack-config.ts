@@ -14,7 +14,6 @@ const config = {
   entry: ["babel-polyfill", "./source/index.tsx"],
   output: {
     path: path.join(__dirname, "dist"),
-    publicPath: "/",
     filename: "./bundle.js"
   },
   devtool: "source-map",
