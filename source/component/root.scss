@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&family=Zen+Maru+Gothic:wght@400;700&display=swap");
+
+
+*:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+  all: unset;
+  display: revert;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0rpx;
+  padding: 0rpx;
+  width: 100%;
+  height: 100%;
+  font-family: "Varela Round", "Zen Maru Gothic", sans-serif;
+  font-feature-settings: "palt" 1, "pkna" 1, "lnum" 1;
+  color: hsl(0, 0%, 20%);
+  line-height: 1;
+  text-decoration-skip-ink: none;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+:global(#root) {
+  width: 100%;
+  height: 100%;
+}
