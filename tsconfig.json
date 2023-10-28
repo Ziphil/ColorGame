@@ -20,7 +20,7 @@
     "removeComments": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "useUnknownInCatchVariables": false,
+    "useUnknownInCatchVariables": false
   },
   "include": [
     "source/**/*",
